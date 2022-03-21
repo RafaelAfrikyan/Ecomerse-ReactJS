@@ -3,6 +3,7 @@ import "./ModalContent.css";
 import { ACTION_TYPES } from "../../App";
 import { Context } from "../Context";
 
+
 export default function ModalContent({ title, totalCount, image, id }) {
   const dispatch = useContext(Context);
   const addHandleClick = () => {

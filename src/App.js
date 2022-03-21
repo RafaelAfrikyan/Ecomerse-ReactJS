@@ -9,6 +9,7 @@ export const ACTION_TYPES = {
   SET_PRODUCTS: "SET_PRODUCTS",
   CHANGE_ITEM_COUNT: "CHANGE_ITEM_COUNT",
   CHANGE_CART_MODAL: "CHANGE_CART_MODAL",
+  CLOSE_CART_CLICK_OUT: "CLOSE_CART_CLICK_OUT",
 };
 
 const defaultState = {
@@ -36,11 +37,15 @@ function reducer(state, action) {
     case ACTION_TYPES.CHANGE_CART_MODAL: {
       return { ...state, isModalOpen: !state.isModalOpen };
     }
+    
   }
+
 }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, defaultState);
+
+  
 
   const openModal = () => {
     dispatch({
@@ -62,13 +67,12 @@ function App() {
         });
       });
   }, []);
- 
 
   return (
     <Context.Provider value={dispatch}>
       <div className="App">
         <Navbar products={state.products} openModal={openModal} />
-        {state.isModalOpen && <Modal products={state.products} />}
+        {state.isModalOpen && <Modal isModalOpen={state.isModalOpen} products={state.products} />}
         <ProductContainer products={state.products} />
       </div>
     </Context.Provider>
