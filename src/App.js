@@ -1,9 +1,10 @@
 import "./App.css";
-import React, { useEffect, useReducer } from "react";
+import React, { Suspense, useEffect, useReducer } from "react";
 import Navbar from "./Components/Navbar/Navbar";
 import ProductContainer from "./Components/ProductsContainer/ProductsContainer";
-import Modal from "./Components/Modal/Modal";
+// import Modal from "./Components/Modal/Modal";
 import { Context } from "./Components/Context";
+const Modal = React.lazy(() => import("./Components/Modal/Modal"));
 
 export const ACTION_TYPES = {
   SET_PRODUCTS: "SET_PRODUCTS",
@@ -37,15 +38,11 @@ function reducer(state, action) {
     case ACTION_TYPES.CHANGE_CART_MODAL: {
       return { ...state, isModalOpen: !state.isModalOpen };
     }
-    
   }
-
 }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, defaultState);
-
-  
 
   const openModal = () => {
     dispatch({
@@ -72,7 +69,11 @@ function App() {
     <Context.Provider value={dispatch}>
       <div className="App">
         <Navbar products={state.products} openModal={openModal} />
-        {state.isModalOpen && <Modal isModalOpen={state.isModalOpen} products={state.products} />}
+        <Suspense fallback={<span>Loading...</span>}>
+          {state.isModalOpen && (
+            <Modal isModalOpen={state.isModalOpen} products={state.products} />
+          )}
+        </Suspense>
         <ProductContainer products={state.products} />
       </div>
     </Context.Provider>
