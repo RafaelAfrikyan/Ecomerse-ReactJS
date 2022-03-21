@@ -3,7 +3,6 @@ import { useState } from "react";
 import "./Navbar.css";
 
 function Navbar({ openModal }) {
-  
   return (
     <div className="navbar">
       <div>Logo</div>
@@ -12,7 +11,6 @@ function Navbar({ openModal }) {
         alt="sorry"
         onClick={openModal}
       />
-      
     </div>
   );
 }

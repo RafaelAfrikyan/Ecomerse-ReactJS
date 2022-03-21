@@ -65,10 +65,15 @@ function App() {
       });
   }, []);
 
+ 
   return (
     <Context.Provider value={dispatch}>
       <div className="App">
-        <Navbar products={state.products} openModal={openModal} />
+        <Navbar
+          
+          products={state.products}
+          openModal={openModal}
+        />
         <Suspense fallback={<span>Loading...</span>}>
           {state.isModalOpen && (
             <Modal isModalOpen={state.isModalOpen} products={state.products} />

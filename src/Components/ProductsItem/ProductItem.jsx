@@ -13,7 +13,9 @@ export default function ProductItem({ id, price, title, totalCount, image }) {
       count: +1,
     });
   };
-  
+  // const handleLinkClick = () => {
+  //   window.location.href = "http://localhost:3000/item";
+  // };
 
   return (
     <div className="ProductItem">
@@ -24,7 +26,12 @@ export default function ProductItem({ id, price, title, totalCount, image }) {
       {totalCount <= 0 ? (
         <button onClick={changeShowCounter}>Add to Cart</button>
       ) : (
-        <Counter totalCount={totalCount} title={title} id={id} dispatch={dispatch} />
+        <Counter
+          totalCount={totalCount}
+          title={title}
+          id={id}
+          dispatch={dispatch}
+        />
       )}
     </div>
   );
