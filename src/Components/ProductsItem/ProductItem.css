@@ -1,4 +1,4 @@
-.ProductItem {
+/* .ProductItem {
   width: 250px;
   height: 370px;
   border: 1px solid black;
@@ -8,10 +8,57 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 35px;
-  margin: 35px;
   cursor: pointer;
 }
 .ProductItem > img {
   width: 125px;
   height: 150px;
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+.container {
+  background: #979b98;
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+}
+.card__content > img {
+  width: 125px;
+  height: 150px;
+}
+.card {
+  width: 250px;
+  height: 370px;
+  max-height: 300px;
+  padding: auto;
+  text-align: center;
+  background: #e9eceb;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 35px;
+  cursor: pointer;
+  box-shadow: 25px 25px 50px #8c918c, -25px -25px 50px #878f8c;
+}
+
+.card__content > button {
+  padding: 6px;
+  border-radius: 50px;
+  background: #5b5e5b;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  /* margin: 50px auto; */
+  margin-: 10px;
 }

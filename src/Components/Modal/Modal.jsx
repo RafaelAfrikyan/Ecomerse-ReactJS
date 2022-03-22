@@ -23,6 +23,9 @@ export default function Modal({ products, isModalOpen }) {
     if (refModal.current) {
       window.addEventListener("click", handleClose);
     }
+    return () => {
+      window.removeEventListener("click", handleClose);
+    };
   }, [refModal]);
 
   return (

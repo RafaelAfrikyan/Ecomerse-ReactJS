@@ -1,10 +1,12 @@
 import "./App.css";
 import React, { Suspense, useEffect, useReducer } from "react";
-import Navbar from "./Components/Navbar/Navbar";
-import ProductContainer from "./Components/ProductsContainer/ProductsContainer";
-// import Modal from "./Components/Modal/Modal";
-import { Context } from "./Components/Context";
-const Modal = React.lazy(() => import("./Components/Modal/Modal"));
+import { Route, Routes } from "react-router-dom";
+
+import ContentPage from "./Components/SecondPage/ContentPage";
+import Layout from "./Components/Layout";
+
+import { Context } from "../src/Components/Context";
+import Home from "./Components/Home";
 
 export const ACTION_TYPES = {
   SET_PRODUCTS: "SET_PRODUCTS",
@@ -41,7 +43,7 @@ function reducer(state, action) {
   }
 }
 
-function App() {
+export default function App() {
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   const openModal = () => {
@@ -65,24 +67,24 @@ function App() {
       });
   }, []);
 
- 
   return (
-    <Context.Provider value={dispatch}>
-      <div className="App">
-        <Navbar
-          
-          products={state.products}
-          openModal={openModal}
-        />
-        <Suspense fallback={<span>Loading...</span>}>
-          {state.isModalOpen && (
-            <Modal isModalOpen={state.isModalOpen} products={state.products} />
-          )}
-        </Suspense>
-        <ProductContainer products={state.products} />
-      </div>
-    </Context.Provider>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Layout openModal={openModal} />}>
+          <Route
+            index
+            element={
+              <Home
+                state={state}
+                products={state.products}
+                isModalOpen={state.isModalOpen}
+                dispatch={dispatch}
+              />
+            }
+          />
+          <Route path="/content-page" element={<ContentPage products={state.products} />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
-
-export default App;

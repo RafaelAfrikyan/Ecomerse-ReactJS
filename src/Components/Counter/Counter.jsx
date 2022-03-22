@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import "./Counter.css";
 import { ACTION_TYPES } from "../../App";
+import { Context } from "../Context";
 
-export default function Counter({ totalCount, title, dispatch, id }) {
-  const addCount = () => {
+export default function Counter({ totalCount, id }) {
+  const dispatch = useContext(Context);
+  const addCount = (e) => {
+    e.stopPropagation();
     dispatch({
       type: ACTION_TYPES.CHANGE_ITEM_COUNT,
       id,
       count: +1,
     });
   };
-  const subCount = () => {
+  const subCount = (e) => {
+    e.stopPropagation();
     dispatch({
       type: ACTION_TYPES.CHANGE_ITEM_COUNT,
       id,
       count: -1,
     });
   };
-
- 
 
   return (
     <div>
